@@ -7,297 +7,108 @@
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #FAF9F5;
-            --text-main: #141414;
-            --text-muted: #595959;
-            --accent: #7A1C1C;
-            --border-color: #DCDAD3;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.65;
-            padding: 0 20px;
-        }
-
-        .container {
-            max-width: 1040px;
-            margin: 0 auto;
-        }
-
-        /* Газетная шапка */
-        header {
-            text-align: center;
-            padding: 32px 0 20px;
-            border-bottom: 3px double var(--text-main);
-        }
-
-        .edition-meta {
-            font-size: 12px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
-
-        .masthead {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(36px, 6vw, 64px);
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            line-height: 1.1;
-            margin-bottom: 10px;
-        }
-
-        .tagline {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 17px;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
-
-        nav {
-            border-top: 1px solid var(--border-color);
-            padding-top: 14px;
-            display: flex;
-            justify-content: center;
-            gap: 28px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: var(--accent);
-        }
-
-        /* Главная статья (Передовица) */
-        .lead-story {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 36px;
-            padding: 40px 0;
-            border-bottom: 1px solid var(--border-color);
-            align-items: center;
-        }
-
-        .lead-image {
-            width: 100%;
-            height: 360px;
-            object-fit: cover;
-            filter: contrast(1.03);
-        }
-
-        .category-label {
-            color: var(--accent);
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .lead-content h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            line-height: 1.25;
-            margin-bottom: 16px;
-        }
-
-        .lead-content p {
-            color: var(--text-muted);
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        .read-more {
-            display: inline-block;
-            text-decoration: none;
-            color: var(--text-main);
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--text-main);
-            padding-bottom: 3px;
-        }
-
-        .read-more:hover {
-            color: var(--accent);
-            border-color: var(--accent);
-        }
-
-        /* Сетка статей */
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            padding: 40px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .article-card {
-            border-right: 1px solid var(--border-color);
-            padding-right: 28px;
-        }
-
-        .article-card:last-child {
-            border-right: none;
-            padding-right: 0;
-        }
-
-        .article-card h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            line-height: 1.3;
-            margin-bottom: 12px;
-        }
-
-        .article-card p {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        .article-meta {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        /* Колонка редактора */
-        .editors-note {
-            background-color: #F2EFE9;
-            padding: 36px;
-            margin: 40px 0;
-            border-left: 3px solid var(--accent);
-        }
-
-        .editors-note h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .editors-note p {
-            font-size: 15px;
-            color: var(--text-main);
-            max-width: 780px;
-            margin-bottom: 12px;
-        }
-
-        .signature {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 15px;
-            color: var(--text-muted);
-        }
-
-        /* Подвал */
-        footer {
-            text-align: center;
-            padding: 32px 0 48px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* Адаптация под смартфоны */
-        @media (max-width: 820px) {
-            .lead-story {
-                grid-template-columns: 1fr;
-            }
-            .articles-grid {
-                grid-template-columns: 1fr;
-            }
-            .article-card {
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
-                padding-right: 0;
-                padding-bottom: 24px;
-            }
-            .article-card:last-child {
-                border-bottom: none;
-            }
-        }
-    </style>
+    <!-- Подключаем отдельный файл стилей -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
     <header>
         <div class="edition-meta">Issue No. 1 • November 2026 • Independent Digital Edition</div>
-        <div class="masthead">The Young Times</div>
+        <div class="masthead" onclick="goHome()">The Young Times</div>
         <div class="tagline">Ideas, culture, and the modern world — through the eyes of a new generation.</div>
         <nav>
-            <a href="#top">Home</a>
-            <a href="#society">Society</a>
-            <a href="#culture">Culture</a>
-            <a href="#science">Science & Tech</a>
-            <a href="#about">About</a>
+            <button class="nav-btn active" data-filter="all" onclick="filterCategory('all', this)">Front Page</button>
+            <button class="nav-btn" data-filter="Society" onclick="filterCategory('Society', this)">Society</button>
+            <button class="nav-btn" data-filter="Culture" onclick="filterCategory('Culture', this)">Culture</button>
+            <button class="nav-btn" data-filter="Science & Tech" onclick="filterCategory('Science & Tech', this)">Science & Tech</button>
+            <button class="nav-btn" onclick="scrollToAbout()">About</button>
         </nav>
     </header>
 
-    <main>
-        <!-- Главная статья -->
-        <section class="lead-story">
-            <img src="https://unsplash.com" alt="Books and coffee" class="lead-image">
+    <!-- ПЕРВАЯ ПОЛОСА (ГЛАВНАЯ СТРАНИЦА) -->
+    <main id="front-page">
+
+        <!-- ГЛАВНАЯ СТАТЬЯ (ПЕРЕДОВИЦА) -->
+        <article class="lead-story" data-category="Society" onclick="openArticle(this)">
+            <img src="https://unsplash.com" alt="Books" class="lead-image">
             <div class="lead-content">
                 <span class="category-label">Cover Story • Society</span>
-                <h1>The Quiet Comeback: Why Gen Z Is Returning to Paper Books and Analog Tech</h1>
-                <p>Surrounded by endless notifications and short-form feeds, a growing number of young people are choosing printed pages, vinyl records, and offline spaces to reclaim their focus.</p>
-                <a href="#" class="read-more">Read Full Story →</a>
+                <h1>The Quiet Comeback: Why Gen Z Is Returning to Paper Books</h1>
+                <p class="subtitle">Surrounded by endless notifications, a growing number of young people are choosing printed pages and offline spaces.</p>
+                <span class="read-more">Read Full Story →</span>
             </div>
-        </section>
 
-        <!-- Три колонки статей -->
+            <!-- Полный текст статьи (скрыт на главной, открывается при клике) -->
+            <div class="full-text">
+                <span class="meta-info">Nov 12, 2026 • 4 min read</span>
+                <p>Walk into any independent bookstore on a Saturday afternoon, and you will notice something unexpected. Alongside longtime readers, the aisles are filled with teenagers and university students browsing paperbacks and buying physical notebooks.</p>
+                <p>After growing up entirely online, many young people are experiencing quiet digital fatigue. Algorithms decide what we watch, and notifications fragment our attention every few minutes.</p>
+                <p>Analog objects offer the opposite: they have boundaries. Choosing offline tools is not about rejecting technology — it is about deciding when and how we want to be connected.</p>
+            </div>
+        </article>
+
+        <!-- СЕТКА КАРТОЧЕК СТАТЕЙ -->
         <section class="articles-grid" id="articles">
-            <article class="article-card" id="culture">
-                <span class="category-label">Culture & Ideas</span>
-                <h2>More Than Entertainment: 3 Books That Change How You See the World</h2>
-                <p>From quiet philosophical essays to modern classics — a curated reading list for curious minds looking for deeper perspectives.</p>
-                <div class="article-meta">Nov 12, 2026 • 4 min read</div>
-            </article>
 
-            <article class="article-card" id="science">
-                <span class="category-label">Science & Tech</span>
-                <h2>Studying in the Age of AI: Useful Tool or Easy Shortcut?</h2>
-                <p>How artificial intelligence is reshaping schoolwork, creativity, and critical thinking — and where students should draw the line.</p>
+            <!-- Карточка 1 -->
+            <article class="article-card" data-category="Culture" onclick="openArticle(this)">
+                <span class="category-label">Culture</span>
+                <h2>3 Books That Change How You See the World</h2>
+                <p class="subtitle">A curated reading list for curious minds looking for deeper perspectives.</p>
                 <div class="article-meta">Nov 12, 2026 • 5 min read</div>
+
+                <div class="full-text">
+                    <span class="meta-info">Nov 12, 2026 • 5 min read</span>
+                    <p>The best books do not just tell a story — they subtly rearrange how you notice everyday life long after you finish the final page.</p>
+                    <p>Whether you are drawn to essays on art, modern fiction, or reflections on time and memory, building a personal reading list is one of the simplest ways to step outside the daily news cycle.</p>
+                </div>
             </article>
 
-            <article class="article-card" id="society">
-                <span class="category-label">Modern Life</span>
-                <h2>Third Places: Where Young People Actually Spend Time Today</h2>
-                <p>Neither home nor school: exploring the libraries, quiet cafes, and digital communities where new ideas are born.</p>
-                <div class="article-meta">Nov 12, 2026 • 4 min read</div>
+            <!-- Карточка 2 -->
+            <article class="article-card" data-category="Science & Tech" onclick="openArticle(this)">
+                <span class="category-label">Science & Tech</span>
+                <h2>Studying in the Age of AI: Tool or Shortcut?</h2>
+                <p class="subtitle">How artificial intelligence is reshaping schoolwork and critical thinking.</p>
+                <div class="article-meta">Nov 12, 2026 • 5 min read</div>
+
+                <div class="full-text">
+                    <span class="meta-info">Nov 12, 2026 • 5 min read</span>
+                    <p>Artificial intelligence has become the quiet study partner of an entire generation. Used thoughtfully, it can explain complex concepts and help organize research.</p>
+                    <p>The real skill for students today is knowing how to use it as a sounding board while keeping your own voice intact.</p>
+                </div>
             </article>
+
+            <!-- Карточка 3 -->
+            <article class="article-card" data-category="Society" onclick="openArticle(this)">
+                <span class="category-label">Society</span>
+                <h2>Third Places: Where Young People Spend Time Today</h2>
+                <p class="subtitle">Exploring the libraries, quiet cafes, and spaces where new ideas are born.</p>
+                <div class="article-meta">Nov 12, 2026 • 4 min read</div>
+
+                <div class="full-text">
+                    <span class="meta-info">Nov 12, 2026 • 4 min read</span>
+                    <p>Sociologists use the term 'third place' to describe the social surroundings separate from home and school.</p>
+                    <p>Modern libraries, independent coffee shops, and local cultural centers are becoming vital sanctuaries for quiet focus and unhurried conversation.</p>
+                </div>
+            </article>
+
         </section>
 
-        <!-- Колонка редактора / О проекте -->
+        <!-- КОЛОНКА РЕДАКТОРА -->
         <section class="editors-note" id="about">
             <h3>Editor’s Note & About The Young Times</h3>
-            <p>Today’s media moves too fast. Between loud headlines and endless scrolling, it is easy to lose the bigger picture. <strong>The Young Times</strong> was created as a calm, thoughtful digital publication dedicated to culture, society, and contemporary ideas — written without noise or rush.</p>
+            <p>Today’s media moves too fast. Between loud headlines and endless scrolling, it is easy to lose the bigger picture. <strong>The Young Times</strong> was created as a calm, thoughtful digital publication dedicated to culture, society, and contemporary ideas.</p>
             <div class="signature">— Editor-in-Chief, The Young Times</div>
         </section>
+
+    </main>
+
+    <!-- СТРАНИЦА ЧТЕНИЯ ОТКРЫТОЙ СТАТЬИ -->
+    <main id="reader-view" class="reader-view">
+        <button class="back-btn" onclick="goHome()">← Back to Front Page</button>
+        <div id="reader-content"></div>
+        <button class="back-btn bottom-back" onclick="goHome()">← Back to Front Page</button>
     </main>
 
     <footer>
@@ -305,5 +116,8 @@
     </footer>
 </div>
 
+<!-- Подключаем отдельный файл логики -->
+<script src="script.js"></script>
 </body>
 </html>
+
